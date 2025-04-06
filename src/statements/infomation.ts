@@ -283,4 +283,39 @@ export class Information extends BaseStatement {
     );
   }
 
+  /** 財務活動によるキャッシュ・フロー */
+  public get financialActivity(): number {
+    return this.extractNumber(
+      "jpcrp_cor:NetCashProvidedByUsedInFinancingActivitiesSummaryOfBusinessResults",
+      this.constants.context.CurrentYearDuration_NonConsolidatedMember
+    );
+  }
+
+  public get financialActivityPrior1Year(): number {
+    return this.extractNumber(
+      "jpcrp_cor:NetCashProvidedByUsedInFinancingActivitiesSummaryOfBusinessResults",
+      this.constants.context.Prior1YearDuration_NonConsolidatedMember
+    );
+  }
+
+  public get financialActivityPrior2Year(): number {
+    return this.extractNumber(
+      "jpcrp_cor:NetCashProvidedByUsedInFinancingActivitiesSummaryOfBusinessResults",
+      this.constants.context.Prior2YearDuration_NonConsolidatedMember
+    );
+  }
+
+  public get financialActivityPrior3Year(): number {
+    return this.extractNumber(
+      "jpcrp_cor:NetCashProvidedByUsedInFinancingActivitiesSummaryOfBusinessResults",
+      this.constants.context.Prior3YearDuration_NonConsolidatedMember
+    );
+  }
+
+  public get financialActivityPrior4Year(): number {
+    return this.extractNumber(
+      "jpcrp_cor:NetCashProvidedByUsedInFinancingActivitiesSummaryOfBusinessResults",
+      this.constants.context.Prior4YearDuration_NonConsolidatedMember
+    );
+  }
 }
