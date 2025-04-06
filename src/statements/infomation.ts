@@ -256,4 +256,31 @@ export class Information extends BaseStatement {
       this.constants.context.CurrentYearDuration_NonConsolidatedMember
     );
   }
+
+  /** 投資活動によるキャッシュ・フロー */
+  public get investmentActivityPrior1Year(): number {
+    return this.extractNumber(
+      "jpcrp_cor:NetCashProvidedByUsedInInvestingActivitiesSummaryOfBusinessResults",
+      this.constants.context.Prior1YearDuration_NonConsolidatedMember
+    );
+  }
+  public get investmentActivityPrior2Year(): number {
+    return this.extractNumber(
+      "jpcrp_cor:NetCashProvidedByUsedInInvestingActivitiesSummaryOfBusinessResults",
+      this.constants.context.Prior2YearDuration_NonConsolidatedMember
+    );
+  }
+  public get investmentActivityPrior3Year(): number {
+    return this.extractNumber(
+      "jpcrp_cor:NetCashProvidedByUsedInInvestingActivitiesSummaryOfBusinessResults",
+      this.constants.context.Prior3YearDuration_NonConsolidatedMember
+    );
+  }
+  public get investmentActivityPrior4Year(): number {
+    return this.extractNumber(
+      "jpcrp_cor:NetCashProvidedByUsedInInvestingActivitiesSummaryOfBusinessResults",
+      this.constants.context.Prior4YearDuration_NonConsolidatedMember
+    );
+  }
+
 }
