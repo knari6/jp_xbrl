@@ -214,42 +214,43 @@ export class Information extends BaseStatement {
     );
   }
 
-  public get cashFlowFromOperatingActivities(): number {
+  /** 営業活動によるキャッシュ・フロー */
+  public get operatingActivity(): number {
     return this.extractNumber(
       "jpcrp_cor:NetCashProvidedByUsedInOperatingActivitiesSummaryOfBusinessResults",
       this.constants.context.CurrentYearDuration_NonConsolidatedMember
     );
   }
 
-  public get cashFlowFromOperatingActivitiesPrior1Year(): number {
+  public get operatingActivityPrior1Year(): number {
     return this.extractNumber(
       "jpcrp_cor:NetCashProvidedByUsedInOperatingActivitiesSummaryOfBusinessResults",
       this.constants.context.Prior1YearDuration_NonConsolidatedMember
     );
   }
 
-  public get cashFlowFromOperatingActivitiesPrior2Year(): number {
+  public get operatingActivityPrior2Year(): number {
     return this.extractNumber(
       "jpcrp_cor:NetCashProvidedByUsedInOperatingActivitiesSummaryOfBusinessResults",
       this.constants.context.Prior2YearDuration_NonConsolidatedMember
     );
   }
 
-  public get cashFlowFromOperatingActivitiesPrior3Year(): number {
+  public get operatingActivityPrior3Year(): number {
     return this.extractNumber(
       "jpcrp_cor:NetCashProvidedByUsedInOperatingActivitiesSummaryOfBusinessResults",
       this.constants.context.Prior3YearDuration_NonConsolidatedMember
     );
   }
 
-  public get cashFlowFromOperatingActivitiesPrior4Year(): number {
+  public get operatingActivityPrior4Year(): number {
     return this.extractNumber(
       "jpcrp_cor:NetCashProvidedByUsedInOperatingActivitiesSummaryOfBusinessResults",
       this.constants.context.Prior4YearDuration_NonConsolidatedMember
     );
   }
 
-  public get cashFlowFromInvestmentActivities(): number {
+  public get investmentActivity(): number {
     return this.extractNumber(
       "jpcrp_cor:NetCashProvidedByUsedInInvestingActivitiesSummaryOfBusinessResults",
       this.constants.context.CurrentYearDuration_NonConsolidatedMember
