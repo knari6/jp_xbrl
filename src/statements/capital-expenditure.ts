@@ -1,6 +1,7 @@
-export class CapitalExpenditure {
-  private readonly xmlData: any;
+import { BaseStatement } from "./base";
+
+export class CapitalExpenditure extends BaseStatement {
   constructor(xmlData: any) {
-    this.xmlData = xmlData;
+    super(xmlData);
   }
 }

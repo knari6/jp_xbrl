@@ -1,8 +1,8 @@
 import { BaseStatement } from "./base";
 
 export class Information extends BaseStatement {
-  constructor(xmlData: any, dirname: string) {
-    super(xmlData, dirname);
+  constructor(xmlData: any) {
+    super(xmlData);
   }
 
   public get sale(): number {

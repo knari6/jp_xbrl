@@ -1,16 +1,12 @@
 import { QuarterType } from "../interfaces/quarter-type";
-import { Parser } from "../parser";
 import * as constants from "../constants";
 
 export class BaseStatement {
-  private readonly context = "CurrentYearInstant_NonConsolidatedMember";
   private readonly xmlData: any;
-  private readonly parser: Parser;
   public readonly constants: any;
 
-  constructor(xmlData: any, dirName: string) {
+  constructor(xmlData: any) {
     this.xmlData = xmlData;
-    this.parser = new Parser(dirName);
     this.constants = constants;
   }
 
@@ -24,7 +20,7 @@ export class BaseStatement {
   public extractNumber(key: string, context: string): number {
     try {
       const value = this.xmlData["xbrli:xbrl"][key]?.find(
-        (item: any) => item["$"].contextRef === this.context
+        (item: any) => item["$"].contextRef === context
       );
       return value ? parseInt(value["_"], 10) : 0;
     } catch (error) {
