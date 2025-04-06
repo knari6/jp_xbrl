@@ -109,6 +109,7 @@ export class Information extends BaseStatement {
     );
   }
 
+  /** 発行済み株式数 */
   public get stockAmount(): number {
     return this.extractNumber(
       "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
@@ -141,6 +142,7 @@ export class Information extends BaseStatement {
     );
   }
 
+  /** 純資産 */
   public get netAssets(): number {
     return this.extractNumber(
       "jpcrp_cor:NetAssetsSummaryOfBusinessResults",
@@ -176,6 +178,7 @@ export class Information extends BaseStatement {
     );
   }
 
+  /** 総資産 */
   public get totalAssets(): number {
     return this.extractNumber(
       "jpcrp_cor:TotalAssetsSummaryOfBusinessResults",
