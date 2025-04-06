@@ -318,4 +318,37 @@ export class Information extends BaseStatement {
       this.constants.context.Prior4YearDuration_NonConsolidatedMember
     );
   }
+
+  /** 従業員数 */
+  public get numberOfEmployees(): number {
+    return this.extractNumber(
+      "jpcrp_cor:NumberOfEmployees",
+      this.constants.context.CurrentYearInstant_NonConsolidatedMember
+    );
+  }
+  public get numberOfEmployeesPrior1Year(): number {
+    return this.extractNumber(
+      "jpcrp_cor:NumberOfEmployees",
+      this.constants.context.Prior1YearInstant_NonConsolidatedMember
+    );
+  }
+  public get numberOfEmployeesPrior2Year(): number {
+    return this.extractNumber(
+      "jpcrp_cor:NumberOfEmployees",
+      this.constants.context.Prior2YearInstant_NonConsolidatedMember
+    );
+  }
+  public get numberOfEmployeesPrior3Year(): number {
+    return this.extractNumber(
+      "jpcrp_cor:NumberOfEmployees",
+      this.constants.context.Prior3YearInstant_NonConsolidatedMember
+    );
+  }
+  public get numberOfEmployeesPrior4Year(): number {
+    return this.extractNumber(
+      "jpcrp_cor:NumberOfEmployees",
+      this.constants.context.Prior4YearInstant_NonConsolidatedMember
+    );
+  }
+
 }
