@@ -351,4 +351,27 @@ export class Information extends BaseStatement {
     );
   }
 
+  /** 従業員の平均年齢 */
+  public get averageAge(): number {
+    return this.extractNumber(
+      "jpcrp_cor:AverageAgeYearsInformationAboutReportingCompanyInformationAboutEmployees",
+      this.constants.context.CurrentYearInstant_NonConsolidatedMember
+    );
+  }
+
+  /** 従業員の平均勤続年数 */
+  public get averageYearsOfService(): number {
+    return this.extractNumber(
+      "jpcrp_cor:AverageLengthOfServiceYearsInformationAboutReportingCompanyInformationAboutEmployees",
+      this.constants.context.CurrentYearInstant_NonConsolidatedMember
+    );
+  }
+
+  /** 従業員の平均給与 */
+  public get averageSalary(): number {
+    return this.extractNumber(
+      "jpcrp_cor:AverageAnnualSalaryInformationAboutReportingCompanyInformationAboutEmployees",
+      this.constants.context.CurrentYearInstant_NonConsolidatedMember
+    );
+  }
 }
