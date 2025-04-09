@@ -1,14 +1,18 @@
 {
-  "name": "@ttogane/japanese-xbrl",
+  "name": "japanese-xbrl",
   "type": "module",
   "module": "dist/index.mjs",
   "version": "0.1.0",
   "main": "dist/index.cjs",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
   "scripts": {
     "build": "node build.mjs && tsc --emitDeclarationOnly --outDir dist/types"
   },
-  "types": "dist/index.d.ts",
-  "license": "MIT",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.cjs"
+  },
   "devDependencies": {
     "@types/xml2js": "^0.4.14",
     "esbuild": "^0.25.2",
@@ -17,11 +21,6 @@
   },
   "dependencies": {
     "xml2js": "^0.6.2"
-  },
-  "exports": {
-    "types": "./dist/types/index.d.ts",
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.cjs"
   },
   "files": [
     "dist"
