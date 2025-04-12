@@ -9,7 +9,7 @@ export class Information extends BaseStatement {
     return (
       this.extractNumber(
         "jpcrp_cor:NetSalesSummaryOfBusinessResults",
-        this.constants.context.NetSalesSummaryOfBusinessResults
+        this.constants.context.CurrentYearDuration_NonConsolidatedMember
       ) ?? null
     );
   }
