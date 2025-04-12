@@ -11,7 +11,12 @@ export class BalanceSheet extends BaseStatement {
       this.extractNumber(
         "jppfs_cor:CashAndDeposits",
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
-      ) ?? null
+      ) ||
+      this.extractNumber(
+        "CashAndCashEquivalentsIFRS",
+        this.constants.context.CurrentYearInstant
+      ) ||
+      null
     );
   }
 
