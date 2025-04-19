@@ -14,36 +14,12 @@ export class Information extends BaseStatement {
     );
   }
 
-  public get salePrior1Year(): number | null {
+  /** 連結経常収益 */
+  public get ordinaryIncomeSummaryOfBusinessResults(): number | null {
     return (
       this.extractNumber(
-        "jpcrp_cor:NetSalesSummaryOfBusinessResults",
-        this.constants.context.Prior1YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  public get salePrior2Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetSalesSummaryOfBusinessResults",
-        this.constants.context.Prior2YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get salePrior3Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetSalesSummaryOfBusinessResults",
-        this.constants.context.Prior3YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get salePrior4Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetSalesSummaryOfBusinessResults",
-        this.constants.context.Prior4YearDuration_NonConsolidatedMember
+        "jpcrp_cor:OrdinaryIncomeSummaryOfBusinessResults",
+        this.constants.context.CurrentYearDuration
       ) ?? null
     );
   }
@@ -57,39 +33,6 @@ export class Information extends BaseStatement {
     );
   }
 
-  public get ordinaryIncomePrior1Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:OrdinaryIncomeLossSummaryOfBusinessResults",
-        this.constants.context.Prior1YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get ordinaryIncomePrior2Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:OrdinaryIncomeLossSummaryOfBusinessResults",
-        this.constants.context.Prior2YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get ordinaryIncomePrior3Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:OrdinaryIncomeLossSummaryOfBusinessResults",
-        this.constants.context.Prior3YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get ordinaryIncomePrior4Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:OrdinaryIncomeLossSummaryOfBusinessResults",
-        this.constants.context.Prior4YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
   public get profit(): number | null {
     return (
       this.extractNumber(
@@ -99,39 +42,49 @@ export class Information extends BaseStatement {
     );
   }
 
-  public get profitPrior1Year(): number | null {
+  /** 親会社株主に帰属する当期純利益 */
+  public get profitLossAttributableToOwnersOfParentSummaryOfBusinessResults():
+    | number
+    | null {
     return (
       this.extractNumber(
-        "jpcrp_cor:NetIncomeLossSummaryOfBusinessResults",
-        this.constants.context.Prior1YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get profitPrior2Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetIncomeLossSummaryOfBusinessResults",
-        this.constants.context.Prior2YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get profitPrior3Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetIncomeLossSummaryOfBusinessResults",
-        this.constants.context.Prior3YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get profitPrior4Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetIncomeLossSummaryOfBusinessResults",
-        this.constants.context.Prior4YearDuration_NonConsolidatedMember
+        "jpcrp_cor:ProfitLossAttributableToOwnersOfParentSummaryOfBusinessResults",
+        this.constants.context.CurrentYearDuration
       ) ?? null
     );
   }
 
+  /** 連結包括利益 */
+  public get comprehensiveIncomeSummaryOfBusinessResults(): number | null {
+    return (
+      this.extractNumber(
+        "jpcrp_cor:ComprehensiveIncomeSummaryOfBusinessResults",
+        this.constants.context.CurrentYearDuration
+      ) ?? null
+    );
+  }
+
+  /** 連結純資産額 */
+  public get netAssetsSummaryOfBusinessResults(): number | null {
+    return (
+      this.extractNumber(
+        "jpcrp_cor:NetAssetsSummaryOfBusinessResults",
+        this.constants.context.CurrentYearInstant
+      ) ?? null
+    );
+  }
+
+  /** 連結総資産額 */
+  public get totalAssetsSummaryOfBusinessResults(): number | null {
+    return (
+      this.extractNumber(
+        "jpcrp_cor:TotalAssetsSummaryOfBusinessResults",
+        this.constants.context.CurrentYearInstant
+      ) ?? null
+    );
+  }
+
+  /** 資本金 */
   public get capitalStock(): number | null {
     return (
       this.extractNumber(
@@ -151,81 +104,12 @@ export class Information extends BaseStatement {
     );
   }
 
-  public get stockAmountPrior1Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
-        this.constants.context.Prior1YearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get stockAmountPrior2Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
-        this.constants.context.Prior2YearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get stockAmountPrior3Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
-        this.constants.context.Prior3YearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get stockAmountPrior4Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
-        this.constants.context.Prior4YearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
   /** 純資産 */
   public get netAssets(): number | null {
     return (
       this.extractNumber(
         "jpcrp_cor:NetAssetsSummaryOfBusinessResults",
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  public get netAssetsPrior1Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetAssetsSummaryOfBusinessResults",
-        this.constants.context.Prior1YearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  public get netAssetsPrior2Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetAssetsSummaryOfBusinessResults",
-        this.constants.context.Prior2YearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  public get netAssetsPrior3Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetAssetsSummaryOfBusinessResults",
-        this.constants.context.Prior3YearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  public get netAssetsPrior4Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetAssetsSummaryOfBusinessResults",
-        this.constants.context.Prior4YearInstant_NonConsolidatedMember
       ) ?? null
     );
   }
@@ -240,42 +124,6 @@ export class Information extends BaseStatement {
     );
   }
 
-  public get totalAssetsPrior1Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:TotalAssetsSummaryOfBusinessResults",
-        this.constants.context.Prior1YearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  public get totalAssetsPrior2Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:TotalAssetsSummaryOfBusinessResults",
-        this.constants.context.Prior2YearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  public get totalAssetsPrior3Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:TotalAssetsSummaryOfBusinessResults",
-        this.constants.context.Prior3YearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  public get totalAssetsPrior4Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:TotalAssetsSummaryOfBusinessResults",
-        this.constants.context.Prior4YearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
   /** 営業活動によるキャッシュ・フロー */
   public get operatingActivity(): number | null {
     return (
@@ -286,81 +134,11 @@ export class Information extends BaseStatement {
     );
   }
 
-  public get operatingActivityPrior1Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetCashProvidedByUsedInOperatingActivitiesSummaryOfBusinessResults",
-        this.constants.context.Prior1YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  public get operatingActivityPrior2Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetCashProvidedByUsedInOperatingActivitiesSummaryOfBusinessResults",
-        this.constants.context.Prior2YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  public get operatingActivityPrior3Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetCashProvidedByUsedInOperatingActivitiesSummaryOfBusinessResults",
-        this.constants.context.Prior3YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  public get operatingActivityPrior4Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetCashProvidedByUsedInOperatingActivitiesSummaryOfBusinessResults",
-        this.constants.context.Prior4YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
   public get investmentActivity(): number | null {
     return (
       this.extractNumber(
         "jpcrp_cor:NetCashProvidedByUsedInInvestingActivitiesSummaryOfBusinessResults",
         this.constants.context.CurrentYearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  /** 投資活動によるキャッシュ・フロー */
-  public get investmentActivityPrior1Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetCashProvidedByUsedInInvestingActivitiesSummaryOfBusinessResults",
-        this.constants.context.Prior1YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get investmentActivityPrior2Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetCashProvidedByUsedInInvestingActivitiesSummaryOfBusinessResults",
-        this.constants.context.Prior2YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get investmentActivityPrior3Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetCashProvidedByUsedInInvestingActivitiesSummaryOfBusinessResults",
-        this.constants.context.Prior3YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get investmentActivityPrior4Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetCashProvidedByUsedInInvestingActivitiesSummaryOfBusinessResults",
-        this.constants.context.Prior4YearDuration_NonConsolidatedMember
       ) ?? null
     );
   }
@@ -375,80 +153,12 @@ export class Information extends BaseStatement {
     );
   }
 
-  public get financialActivityPrior1Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetCashProvidedByUsedInFinancingActivitiesSummaryOfBusinessResults",
-        this.constants.context.Prior1YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  public get financialActivityPrior2Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetCashProvidedByUsedInFinancingActivitiesSummaryOfBusinessResults",
-        this.constants.context.Prior2YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  public get financialActivityPrior3Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetCashProvidedByUsedInFinancingActivitiesSummaryOfBusinessResults",
-        this.constants.context.Prior3YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  public get financialActivityPrior4Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NetCashProvidedByUsedInFinancingActivitiesSummaryOfBusinessResults",
-        this.constants.context.Prior4YearDuration_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
   /** 従業員数 */
   public get numberOfEmployees(): number | null {
     return (
       this.extractNumber(
         "jpcrp_cor:NumberOfEmployees",
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get numberOfEmployeesPrior1Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NumberOfEmployees",
-        this.constants.context.Prior1YearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get numberOfEmployeesPrior2Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NumberOfEmployees",
-        this.constants.context.Prior2YearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get numberOfEmployeesPrior3Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NumberOfEmployees",
-        this.constants.context.Prior3YearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-  public get numberOfEmployeesPrior4Year(): number | null {
-    return (
-      this.extractNumber(
-        "jpcrp_cor:NumberOfEmployees",
-        this.constants.context.Prior4YearInstant_NonConsolidatedMember
       ) ?? null
     );
   }
