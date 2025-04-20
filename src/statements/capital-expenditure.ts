@@ -1,3 +1,4 @@
+import { ICapitalExpenditureStatement } from "../interfaces/capital-expenditure";
 import { BaseStatement } from "./base";
 
 export class CapitalExpenditure extends BaseStatement {
@@ -5,6 +6,7 @@ export class CapitalExpenditure extends BaseStatement {
     super(xmlData);
   }
 
+  /** 設備投資額 */
   public get captitalInvestment(): number | null {
     return (
       this.extractNumber(
@@ -15,25 +17,13 @@ export class CapitalExpenditure extends BaseStatement {
   }
 
   /**
-   * 土地の減価償却累計額
+   * 建物の減価償却累計額
    */
   public get buildingDepreciation(): number | null {
     return (
       this.extractNumber(
         "jppfs_cor:AccumulatedDepreciationBuildings",
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
-
-  /**
-   * 建物の減価償却累計額（前期）
-   */
-  public get buildingDepreciationPrior1Year(): number | null {
-    return (
-      this.extractNumber(
-        "jppfs_cor:AccumulatedDepreciationBuildings",
-        this.constants.context.Prior1YearInstant_NonConsolidatedMember
       ) ?? null
     );
   }
@@ -50,15 +40,17 @@ export class CapitalExpenditure extends BaseStatement {
     );
   }
 
-  /**
-   * 工具、器具及び備品の減価償却累計額（前期）
-   */
-  public get toolsDepreciationPrior1Year(): number | null {
-    return (
-      this.extractNumber(
-        "jppfs_cor:AccumulatedDepreciationToolsFurnitureAndFixtures",
-        this.constants.context.Prior1YearInstant_NonConsolidatedMember
-      ) ?? null
-    );
+  public capitalExpenditureStatement(): ICapitalExpenditureStatement {
+    let depreciation: number = 0;
+    if (this.toolsDepreciation) {
+      depreciation += this.toolsDepreciation;
+    }
+    if (this.buildingDepreciation) {
+      depreciation += this.buildingDepreciation;
+    }
+    return {
+      capitalExpenditure: this.captitalInvestment ?? 0,
+      depreciation,
+    };
   }
 }

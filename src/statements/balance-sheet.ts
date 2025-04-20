@@ -1,3 +1,4 @@
+import { IBalanceSheetStatement } from "../interfaces/balance-sheet";
 import { BaseStatement } from "./base";
 
 export class BalanceSheet extends BaseStatement {
@@ -20,6 +21,10 @@ export class BalanceSheet extends BaseStatement {
         "CashAndDueFromBanksAssetsBNK",
         this.constants.context.CurrentYearInstant
       ) ||
+      this.extractNumber(
+        "CashAndCashEquivalentsIFRS",
+        this.constants.context.CurrentYearInstant
+      ) ||
       null
     );
   }
@@ -29,6 +34,76 @@ export class BalanceSheet extends BaseStatement {
     return (
       this.extractNumber(
         "jppfs_cor:AccountsReceivableTrade",
+        this.constants.context.CurrentYearInstant_NonConsolidatedMember
+      ) ?? null
+    );
+  }
+
+  // 受取手形
+  public get notesReceivable(): number | null {
+    return (
+      this.extractNumber(
+        "jppfs_cor:NotesReceivableTrade",
+        this.constants.context.CurrentYearInstant_NonConsolidatedMember
+      ) ?? null
+    );
+  }
+
+  // 電子記録債権
+  public get electronicRecordReceivables(): number | null {
+    return (
+      this.extractNumber(
+        "jppfs_cor:ElectronicallyRecordedMonetaryClaimsOperatingCA",
+        this.constants.context.CurrentYearInstant_NonConsolidatedMember
+      ) ?? null
+    );
+  }
+
+  /** 営業債権及びその他債権 */
+  public get receivables(): number | null {
+    return (
+      this.extractNumber(
+        "TradeAndOtherReceivablesCAIFRS",
+        this.constants.context.CurrentYearInstant
+      ) || null
+    );
+  }
+
+  // 製品および商品
+  public get products(): number | null {
+    return (
+      this.extractNumber(
+        "jppfs_cor:MerchandiseAndFinishedGoods",
+        this.constants.context.CurrentYearInstant_NonConsolidatedMember
+      ) ?? null
+    );
+  }
+
+  // 仕掛品
+  public get workInProgress(): number | null {
+    return (
+      this.extractNumber(
+        "jppfs_cor:WorkInProcess",
+        this.constants.context.CurrentYearInstant_NonConsolidatedMember
+      ) ?? null
+    );
+  }
+
+  // 原材料
+  public get rawMaterials(): number | null {
+    return (
+      this.extractNumber(
+        "jppfs_cor:RawMaterialsAndSupplies",
+        this.constants.context.CurrentYearInstant_NonConsolidatedMember
+      ) ?? null
+    );
+  }
+
+  /** 棚卸資産 */
+  public get inventories(): number | null {
+    return (
+      this.extractNumber(
+        "jppfs_cor:InventoriesCAIFRS",
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
       ) ?? null
     );
@@ -107,12 +182,17 @@ export class BalanceSheet extends BaseStatement {
   }
 
   // 有価証券
-  public get securitiesAssetsBNK(): number | null {
+  public get shortTermInvestmentSecurities(): number | null {
     return (
       this.extractNumber(
         "jppfs_cor:SecuritiesAssetsBNK",
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
-      ) ?? null
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:ShortTermInvestmentSecurities",
+        this.constants.context.CurrentYearInstant_NonConsolidatedMember
+      ) ||
+      null
     );
   }
 
@@ -136,6 +216,16 @@ export class BalanceSheet extends BaseStatement {
     );
   }
 
+  // その他金融資産
+  public get otherFinancialAssets(): number | null {
+    return (
+      this.extractNumber(
+        "jppfs_cor:OtherFinancialAssetsCAIFRS",
+        this.constants.context.CurrentYearInstant
+      ) ?? null
+    );
+  }
+
   /** その他流動資産 */
   public get otherCurrentAssets(): number | null {
     return (
@@ -147,11 +237,15 @@ export class BalanceSheet extends BaseStatement {
         "jppfs_cor:OtherAssetsAssetsBNK",
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
       ) ||
+      this.extractNumber(
+        "jppfs_cor:OtherCurrentAssetsCAIFRS",
+        this.constants.context.CurrentYearInstant
+      ) ||
       null
     );
   }
   /** 流動資産合計 */
-  public get totalCurrentAssets(): number | null {
+  public get currentAssets(): number | null {
     return (
       this.extractNumber(
         "jppfs_cor:CurrentAssets",
@@ -168,21 +262,42 @@ export class BalanceSheet extends BaseStatement {
       ) ?? null
     );
   }
-  // リース資産
-  public get leaseAssetsNetPPE(): number | null {
-    return (
-      this.extractNumber(
-        "jppfs_cor:LeaseAssetsNetPPE",
-        this.constants.context.CurrentYearInstant_NonConsolidatedMember
-      ) ?? null
-    );
-  }
 
   /** 工具、器具及び備品(純額) */
   public get toolsAndEquipment(): number | null {
     return (
       this.extractNumber(
         "jppfs_cor:ToolsFurnitureAndFixturesNet",
+        this.constants.context.CurrentYearInstant_NonConsolidatedMember
+      ) ?? null
+    );
+  }
+
+  /** 車両運搬具(純額) */
+  public get vehicles(): number | null {
+    return (
+      this.extractNumber(
+        "jppfs_cor:VehiclesNet",
+        this.constants.context.CurrentYearInstant_NonConsolidatedMember
+      ) ?? null
+    );
+  }
+
+  // 構築物
+  public get structures(): number | null {
+    return (
+      this.extractNumber(
+        "jppfs_cor:StructuresNet",
+        this.constants.context.CurrentYearInstant_NonConsolidatedMember
+      ) ?? null
+    );
+  }
+
+  // リース資産
+  public get leaseAssetsNetPPE(): number | null {
+    return (
+      this.extractNumber(
+        "jppfs_cor:LeaseAssetsNetPPE",
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
       ) ?? null
     );
@@ -209,12 +324,17 @@ export class BalanceSheet extends BaseStatement {
   }
 
   /** 有形固定資産合計 */
-  public get totalTangibleFixedAssets(): number | null {
+  public get tangibleFixedAssets(): number | null {
     return (
       this.extractNumber(
         "jppfs_cor:PropertyPlantAndEquipment",
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
-      ) ?? null
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:PropertyPlantAndEquipmentIFRS",
+        this.constants.context.CurrentYearInstant
+      ) ||
+      null
     );
   }
 
@@ -242,7 +362,12 @@ export class BalanceSheet extends BaseStatement {
       this.extractNumber(
         "jppfs_cor:Goodwill",
         this.constants.context.CurrentYearInstant
-      ) ?? null
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:GoodwillAndIntangibleAssetsIFRS",
+        this.constants.context.CurrentYearInstant
+      ) ||
+      null
     );
   }
 
@@ -366,17 +491,27 @@ export class BalanceSheet extends BaseStatement {
       this.extractNumber(
         "jppfs_cor:NoncurrentAssets",
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
-      ) ?? null
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:NonCurrentAssetsIFRS",
+        this.constants.context.CurrentYearInstant
+      ) ||
+      null
     );
   }
 
   /** 資産合計 */
-  public get liabilitiesAndNetAssets(): number | null {
+  public get assets(): number | null {
     return (
       this.extractNumber(
         "jppfs_cor:TotalAssets",
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
-      ) ?? null
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:LiabilitiesAndEquityIFRS",
+        this.constants.context.CurrentYearInstant
+      ) ||
+      null
     );
   }
 
@@ -439,12 +574,17 @@ export class BalanceSheet extends BaseStatement {
     );
   }
   /** 流動負債合計 */
-  public get totalCurrentLiabilities(): number | null {
+  public get currentLiabilities(): number | null {
     return (
       this.extractNumber(
         "jppfs_cor:CurrentLiabilities",
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
-      ) ?? null
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:TotalCurrentLiabilitiesIFRS",
+        this.constants.context.CurrentYearInstant
+      ) ||
+      null
     );
   }
   /** その他固定負債 */
@@ -453,16 +593,26 @@ export class BalanceSheet extends BaseStatement {
       this.extractNumber(
         "jppfs_cor:OtherNCL",
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
-      ) ?? null
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:OtherNonCurrentLiabilitiesNCLIFRS",
+        this.constants.context.CurrentYearInstant
+      ) ||
+      null
     );
   }
   /** 固定負債合計 */
-  public get totalNonCurrentLiabilities(): number | null {
+  public get nonCurrentLiabilities(): number | null {
     return (
       this.extractNumber(
         "jppfs_cor:NoncurrentLiabilities",
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
-      ) ?? null
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:NonCurrentLabilitiesIFRS",
+        this.constants.context.CurrentYearInstant
+      ) ||
+      null
     );
   }
 
@@ -564,7 +714,12 @@ export class BalanceSheet extends BaseStatement {
       this.extractNumber(
         "jppfs_cor:ShortTermBondsPayable",
         this.constants.context.CurrentYearInstant
-      ) ?? null
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:BondsAndBorrowingsCLIFRS",
+        this.constants.context.CurrentYearInstant
+      ) ||
+      null
     );
   }
 
@@ -574,7 +729,12 @@ export class BalanceSheet extends BaseStatement {
       this.extractNumber(
         "jppfs_cor:BondsPayable",
         this.constants.context.CurrentYearInstant
-      ) ?? null
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:BondsAndBorrowingsNCLIFRS",
+        this.constants.context.CurrentYearInstant
+      ) ||
+      null
     );
   }
 
@@ -732,7 +892,12 @@ export class BalanceSheet extends BaseStatement {
       this.extractNumber(
         "jppfs_cor:ShareholdersEquity",
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
-      ) ?? null
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:EquityAttributableToOwnersOfParentIFRS",
+        this.constants.context.CurrentYearInstant
+      ) ||
+      null
     );
   }
   /** その他有価証券評価差額金 */
@@ -761,7 +926,7 @@ export class BalanceSheet extends BaseStatement {
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
       ) ||
       this.extractNumber(
-        "jppfs_cor:NetAssets",
+        "jppfs_cor:OtherComponentsOfEquityIFRS",
         this.constants.context.CurrentYearInstant
       ) ||
       null
@@ -775,5 +940,61 @@ export class BalanceSheet extends BaseStatement {
         this.constants.context.CurrentYearInstant_NonConsolidatedMember
       ) ?? null
     );
+  }
+
+  public statement(): IBalanceSheetStatement {
+    let accountReceivable: number = 0;
+    let inventories: number = 0;
+    if (this.accountReceivable) {
+      accountReceivable += this.accountReceivable;
+    }
+    if (this.notesReceivable) {
+      accountReceivable += this.notesReceivable;
+    }
+    if (this.electronicRecordReceivables) {
+      accountReceivable += this.electronicRecordReceivables;
+    }
+    if (this.products) {
+      inventories += this.products;
+    }
+    if (this.workInProgress) {
+      inventories += this.workInProgress;
+    }
+    if (this.rawMaterials) {
+      inventories += this.rawMaterials;
+    }
+
+    return {
+      /** 現金及び預金 */
+      cashAndDeposits: this.cashAndDeposit || 0,
+      /** 売上債権 */
+      accountsReceivable: this.receivables
+        ? this.receivables
+        : accountReceivable,
+      /** 棚卸資産 */
+      inventories: this.inventories ? this.inventories : inventories,
+      /** 有価証券 */
+      securities: this.shortTermInvestmentSecurities || 0,
+      /** 流動資産 */
+      currentAssets: this.currentAssets || 0,
+      /** 有形固定資産 */
+      propertyPlantAndEquipment: this.tangibleFixedAssets || 0,
+      /** 無形固定資産 */
+      intangibleAssets: this.intangibleAssets || 0,
+      /** 投資有価証券 */
+      investmentSecurities: this.investmentSecurities || 0,
+      /** 投資その他の資産 */
+      investmentsAndOtherAssets: this.totalInvestmentAndOtherAssets || 0,
+      /** 資産合計 */
+      assets: this.assets || 0,
+      /** 流動負債 */
+      currentLiabilities: this.currentLiabilities || 0,
+      /** 固定負債 */
+      nonCurrentLiabilities: this.nonCurrentLiabilities || 0,
+      /** 負債合計 */
+      liabilities: this.liabilities || 0,
+      /** 純資産 */
+      netAssets: this.netAssets || 0,
+    };
   }
 }

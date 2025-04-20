@@ -1,9 +1,56 @@
+import { ICashFlowStatement } from "../interfaces/cash-flow";
 import { BaseStatement } from "./base";
 
 export class cashFlow extends BaseStatement {
   constructor(xmlData: any) {
     super(xmlData);
   }
+
+  /** 営業活動によるキャッシュ・フロー */
+  public get operatingCashFlow(): number | null {
+    return (
+      this.extractNumber(
+        "jppfs_cor:NetCashProvidedByUsedInOperatingActivities",
+        this.constants.context.CurrentYearDuration_NonConsolidatedMember
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:NetCashProvidedByUsedInOperatingActivitiesIFRS",
+        this.constants.context.CurrentYearDuration
+      ) ||
+      null
+    );
+  }
+
+  /** 投資活動によるキャッシュ・フロー */
+  public get investingCashFlow(): number | null {
+    return (
+      this.extractNumber(
+        "jppfs_cor:NetCashProvidedByUsedInInvestmentActivities",
+        this.constants.context.CurrentYearDuration_NonConsolidatedMember
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:NetCashProvidedByUsedInInvestingActivitiesIFRS",
+        this.constants.context.CurrentYearDuration
+      ) ||
+      null
+    );
+  }
+
+  /** 財務活動によるキャッシュ・フロー */
+  public get financingCashFlowAmount(): number | null {
+    return (
+      this.extractNumber(
+        "jppfs_cor:NetCashProvidedByUsedInFinancingActivities",
+        this.constants.context.CurrentYearDuration_NonConsolidatedMember
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:NetCashProvidedByUsedInFinancingActivitiesIFRS",
+        this.constants.context.CurrentYearDuration
+      ) ||
+      null
+    );
+  }
+
   /** 税引前当期純利益 */
   public get incomeBeforeIncomeTaxes(): number | null {
     return this.extractNumber(
@@ -78,9 +125,11 @@ export class cashFlow extends BaseStatement {
   }
   /** その他営業活動によるキャッシュ・フロー */
   public get other(): number | null {
-    return this.extractNumber(
-      "jppfs_cor:OtherNetOpeCF",
-      this.constants.context.CurrentYearDuration_NonConsolidatedMember
+    return (
+      this.extractNumber(
+        "jppfs_cor:OtherNetOpeCF",
+        this.constants.context.CurrentYearDuration_NonConsolidatedMember
+      ) || null
     );
   }
   /** 小計 */
@@ -108,13 +157,6 @@ export class cashFlow extends BaseStatement {
   public get incomeTaxRefund(): number | null {
     return this.extractNumber(
       "jppfs_cor:IncomeTaxesRefundOpeCF",
-      this.constants.context.CurrentYearDuration_NonConsolidatedMember
-    );
-  }
-  /** 営業活動によるキャッシュ・フロー */
-  public get operatingCashFlow(): number | null {
-    return this.extractNumber(
-      "jppfs_cor:NetCashProvidedByUsedInOperatingActivities",
       this.constants.context.CurrentYearDuration_NonConsolidatedMember
     );
   }
@@ -175,13 +217,6 @@ export class cashFlow extends BaseStatement {
       this.constants.context.CurrentYearDuration_NonConsolidatedMember
     );
   }
-  /** 投資活動によるキャッシュ・フロー */
-  public get investingCashFlow(): number | null {
-    return this.extractNumber(
-      "jppfs_cor:NetCashProvidedByUsedInInvestmentActivities",
-      this.constants.context.CurrentYearDuration_NonConsolidatedMember
-    );
-  }
 
   /** 自己株式の取得による支出 */
   public get treasuryStockAcquisition(): number | null {
@@ -204,13 +239,7 @@ export class cashFlow extends BaseStatement {
       this.constants.context.CurrentYearDuration_NonConsolidatedMember
     );
   }
-  /** 財務活動によるキャッシュ・フロー */
-  public get financingCashFlowAmount(): number | null {
-    return this.extractNumber(
-      "jppfs_cor:NetCashProvidedByUsedInFinancingActivities",
-      this.constants.context.CurrentYearDuration_NonConsolidatedMember
-    );
-  }
+
   /** 現金及び現金同等物の増減額（△は減少） */
   public get cashAndCashEquivalents(): number | null {
     return this.extractNumber(
@@ -220,16 +249,39 @@ export class cashFlow extends BaseStatement {
   }
   /** 現金及び現金同等物の期首残高 */
   public get cashAndCashEquivalentsBeginning(): number | null {
-    return this.extractNumber(
-      "jppfs_cor:CashAndCashEquivalents",
-      this.constants.context.CurrentYearDuration_NonConsolidatedMember
+    return (
+      this.extractNumber(
+        "jppfs_cor:CashAndCashEquivalents",
+        this.constants.context.Prior1YearInstant_NonConsolidatedMember
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:CashAndCashEquivalentsIFRS",
+        this.constants.context.Prior1YearInstant
+      ) ||
+      null
     );
   }
+
   /** 現金及び現金同等物の期末残高 */
   public get cashAndCashEquivalentsEnding(): number | null {
-    return this.extractNumber(
-      "jppfs_cor:CashAndCashEquivalents",
-      this.constants.context.CurrentYearDuration_NonConsolidatedMember
+    return (
+      this.extractNumber(
+        "jppfs_cor:CashAndCashEquivalents",
+        this.constants.context.CurrentYearDuration_NonConsolidatedMember
+      ) ||
+      this.extractNumber(
+        "jppfs_cor:CashAndCashEquivalentsIFRS",
+        this.constants.context.CurrentYearDuration
+      ) ||
+      null
     );
+  }
+
+  public cashFlowStatement(): ICashFlowStatement {
+    return {
+      operatingCashFlow: this.operatingCashFlow || 0,
+      investingCashFlow: this.investingCashFlow || 0,
+      financingCashFlowAmount: this.financingCashFlowAmount || 0,
+    };
   }
 }
